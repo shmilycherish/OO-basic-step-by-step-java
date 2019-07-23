@@ -23,4 +23,8 @@ public class Student {
     public int getKlass() {
         return klass;
     }
+
+    public String introduce() {
+        return String.format("I am a Student. I am at Class %s.", getKlass());
+    }
 }
