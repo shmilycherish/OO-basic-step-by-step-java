@@ -9,6 +9,11 @@ public class Teacher extends Person {
     public Teacher(int id, String name, int age, List<Klass> classes) {
         super(id, name, age);
         this.classes = classes;
+        registerTeacherForEachClass();
+    }
+
+    private void registerTeacherForEachClass() {
+        classes.stream().forEach(klass -> klass.registerTeacher(this));
     }
 
     public Teacher(int id, String name, int age) {
@@ -42,6 +47,11 @@ public class Teacher extends Person {
             return super.introduce() + String.format(" I am a Teacher. I teach %s.", student.getName());
         }
         return super.introduce() + String.format(" I am a Teacher. I don't teach %s.", student.getName());
+    }
+
+    public void responseForStudentJoin(Student student) {
+        System.out.println(String.format("I am %s. I know %s has joined %s.",
+                getName(), student.getName(), student.getKlass().getDisplayName()));
     }
 
 }
