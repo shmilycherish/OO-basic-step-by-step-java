@@ -2,6 +2,9 @@ package practice11;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
+import static practice11.Teacher.STUDENT_BECOME_LEADER;
 
 public class Klass {
     private int number;
@@ -24,6 +27,7 @@ public class Klass {
     public void assignLeader(Student student) {
         if(students.contains(student)) {
             this.leader = student;
+            notifyTeacherWithEvent(student, STUDENT_BECOME_LEADER);
         } else {
             System.out.println("It is not one of us.");
         }
@@ -36,7 +40,7 @@ public class Klass {
     public void appendMember(Student student) {
         students.add(student);
         student.setKlass(this);
-        notifyTeacherStudentJoin(student);
+        notifyTeacherWithEvent(student, Teacher.STUDENT_JOIN);
     }
 
     public boolean isIn(Student student) {
@@ -47,7 +51,7 @@ public class Klass {
         teachers.add(teacher);
     }
 
-    public void notifyTeacherStudentJoin(Student student) {
-        teachers.stream().forEach(teacher -> teacher.responseForStudentJoin(student));
+    public void notifyTeacherWithEvent(Student student, String eventName) {
+        teachers.stream().forEach(teacher -> teacher.responseForStudentJoin(student, eventName));
     }
 }

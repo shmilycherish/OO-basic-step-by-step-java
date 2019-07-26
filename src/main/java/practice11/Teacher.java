@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Teacher extends Person {
+    public static final String STUDENT_BECOME_LEADER = "I am %s. I know %s become Leader of %s.";
+    public static final String STUDENT_JOIN = "I am %s. I know %s has joined %s.";
     private List<Klass> classes;
 
     public Teacher(int id, String name, int age, List<Klass> classes) {
@@ -49,8 +51,8 @@ public class Teacher extends Person {
         return super.introduce() + String.format(" I am a Teacher. I don't teach %s.", student.getName());
     }
 
-    public void responseForStudentJoin(Student student) {
-        System.out.println(String.format("I am %s. I know %s has joined %s.",
+    public void responseForStudentJoin(Student student, String eventName) {
+        System.out.println(String.format(eventName,
                 getName(), student.getName(), student.getKlass().getDisplayName()));
     }
 
